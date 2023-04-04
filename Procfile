@@ -1,0 +1,1 @@
+web:sh setup.sh && streamlit run moodgrid_streamlit_2nd_model.py
