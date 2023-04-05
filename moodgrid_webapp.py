@@ -23,6 +23,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
 import streamlit as st
 from streamlit_extras.stateful_button import button
 
