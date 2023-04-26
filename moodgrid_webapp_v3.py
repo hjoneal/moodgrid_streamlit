@@ -564,11 +564,11 @@ if button("Get started", key="button1"):
             st.plotly_chart(fig2, theme=None, use_container_width=True)
 
 
-            # load credentials from .env file
-            load_dotenv()
+            # # load credentials from .env file
+            # load_dotenv()
 
-            CLIENT_ID = os.getenv("CLIENT_ID", "")
-            CLIENT_SECRET = os.getenv("CLIENT_SECRET", "")
+            # CLIENT_ID = os.getenv("CLIENT_ID", "")
+            # CLIENT_SECRET = os.getenv("CLIENT_SECRET", "")
 
             # authenticate
             client_credentials_manager = SpotifyClientCredentials(
