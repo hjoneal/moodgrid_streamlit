@@ -49,11 +49,11 @@ st.text("")
 # update default encoding so streamlit accepts unconventional characters
 sys.stdout.reconfigure(encoding='utf-8')
 
-# # load credentials from .env file
-# load_dotenv()
+# load credentials from .env file
+load_dotenv()
 
-CLIENT_ID="8bea7f32131e4424bec97f066d185fe2"
-CLIENT_SECRET="91a472c1ca7e4549b0c814b7b29495bb"
+CLIENT_ID = os.getenv("CLIENT_ID", "")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET", "")
 
 PLAYLIST_LINK = -1
 PLAYLIST_LINK2 = -1
