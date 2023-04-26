@@ -1,8 +1,8 @@
 mkdir -p ~/.streamlit/
 
-- name: 'Create env file'
-run: |
-    echo "${{ secrets.ENV_FILE }}" > .env
+# - name: 'Create env file'
+# run: |
+#     echo "${{ secrets.ENV_FILE }}" > .env
 
 echo "\
 [server]\n\

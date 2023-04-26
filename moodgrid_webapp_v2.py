@@ -41,12 +41,15 @@ sleep_time=0.075
 # update default encoding so streamlit accepts unconventional characters
 sys.stdout.reconfigure(encoding='utf-8')
 
-# Load environment variables from .env file created in setup.sh
-load_dotenv()
+# # Load environment variables from .env file created in setup.sh
+# load_dotenv()
+
+CLIENT_ID="8bea7f32131e4424bec97f066d185fe2"
+CLIENT_SECRET="91a472c1ca7e4549b0c814b7b29495bb"
 
 
-CLIENT_ID = os.getenv("CLIENT_ID", "")
-CLIENT_SECRET = os.getenv("CLIENT_SECRET", "")
+# CLIENT_ID = os.getenv("CLIENT_ID", "")
+# CLIENT_SECRET = os.getenv("CLIENT_SECRET", "")
 
 PLAYLIST_LINK = -1
 PLAYLIST_LINK2 = -1
@@ -576,8 +579,8 @@ if button("Get started", key="button1"):
             # # load credentials from .env file
             # load_dotenv()
 
-            CLIENT_ID = os.getenv("CLIENT_ID", "")
-            CLIENT_SECRET = os.getenv("CLIENT_SECRET", "")
+            # CLIENT_ID = os.getenv("CLIENT_ID", "")
+            # CLIENT_SECRET = os.getenv("CLIENT_SECRET", "")
 
             # authenticate
             client_credentials_manager = SpotifyClientCredentials(
