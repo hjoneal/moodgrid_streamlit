@@ -41,8 +41,10 @@ sleep_time=0.075
 # update default encoding so streamlit accepts unconventional characters
 sys.stdout.reconfigure(encoding='utf-8')
 
-# load credentials from .env file
-load_dotenv()
+# Load environment variables from .env file located in private repo
+dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'moodgrid-private'))
+load_dotenv(dotenv_path=dotenv_path)
+
 
 CLIENT_ID = os.getenv("CLIENT_ID", "")
 CLIENT_SECRET = os.getenv("CLIENT_SECRET", "")
@@ -572,8 +574,8 @@ if button("Get started", key="button1"):
             st.plotly_chart(fig2, theme=None, use_container_width=True)
 
 
-            # load credentials from .env file
-            load_dotenv()
+            # # load credentials from .env file
+            # load_dotenv()
 
             CLIENT_ID = os.getenv("CLIENT_ID", "")
             CLIENT_SECRET = os.getenv("CLIENT_SECRET", "")
