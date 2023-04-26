@@ -41,9 +41,8 @@ sleep_time=0.075
 # update default encoding so streamlit accepts unconventional characters
 sys.stdout.reconfigure(encoding='utf-8')
 
-# Load environment variables from .env file located in private repo
-dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'moodgrid-private', '.env'))
-load_dotenv(dotenv_path=dotenv_path)
+# Load environment variables from .env file created in setup.sh
+load_dotenv()
 
 
 CLIENT_ID = os.getenv("CLIENT_ID", "")
