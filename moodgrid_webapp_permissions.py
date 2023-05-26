@@ -702,16 +702,28 @@ if button("Get started", key="button1"):
                                 
                 # define welcome
                 welcome_msg = """
-                Welcome! :wave: This app uses the Spotify API to interact with general 
+                This app uses the Spotify API to interact with general 
                 music info and your playlists! In order to view and modify information 
                 associated with your account, you must log in. You only need to do this 
                 once.
                 """
+                
+                # define temporary note
+                note_temp = """
+                _Note: Unfortunately, the current version of Streamlit will not allow for
+                staying on the same page, so the authorization and redirection will open in a 
+                new tab. This has already been addressed in a development release, so it should
+                be implemented in Streamlit Cloud soon!_
+                """
+
+                st.title("Spotify Playlist Preserver")
+
                 if not st.session_state["signed_in"]:
                     st.markdown(welcome_msg)
                     st.write(" ".join(["No tokens found for this session. Please log in by",
                                     "clicking the link below."]))
                     st.markdown(link_html, unsafe_allow_html=True)
+                    st.markdown(note_temp)
 
             def app_sign_in():
                 try:
