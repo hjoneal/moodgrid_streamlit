@@ -708,22 +708,20 @@ if button("Get started", key="button1"):
                 once.
                 """
                 
-                # define temporary note
-                note_temp = """
-                _Note: Unfortunately, the current version of Streamlit will not allow for
-                staying on the same page, so the authorization and redirection will open in a 
-                new tab. This has already been addressed in a development release, so it should
-                be implemented in Streamlit Cloud soon!_
-                """
-
-                st.title("Spotify Playlist Preserver")
+                # # define temporary note
+                # note_temp = """
+                # _Note: Unfortunately, the current version of Streamlit will not allow for
+                # staying on the same page, so the authorization and redirection will open in a 
+                # new tab. This has already been addressed in a development release, so it should
+                # be implemented in Streamlit Cloud soon!_
+                # """
 
                 if not st.session_state["signed_in"]:
                     st.markdown(welcome_msg)
                     st.write(" ".join(["No tokens found for this session. Please log in by",
                                     "clicking the link below."]))
                     st.markdown(link_html, unsafe_allow_html=True)
-                    st.markdown(note_temp)
+                    # st.markdown(note_temp)
 
             def app_sign_in():
                 try:
