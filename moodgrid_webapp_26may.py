@@ -655,7 +655,7 @@ if button("Get started", key="button1"):
             sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
                                                         client_secret=CLIENT_SECRET,
                                                         redirect_uri="http://localhost:8888/callback",
-                                                        scope="playlist-modify-public"))
+                                                        scope="playlist-modify-private"))
 
             
             
@@ -664,7 +664,7 @@ if button("Get started", key="button1"):
             
             playlist_description = f"A playlist created using MoodGrid from {plname_list[:]} with a Happy rating of {find_happy} and an Energy rating of {find_energy}"
 
-            playlist = sp.user_playlist_create(user, new_playlist_name, public=True, description=playlist_description)
+            playlist = sp.user_playlist_create(user, new_playlist_name, public=False, description=playlist_description)
 
             
             # split track_id_list into batches of 100, as Spotify only lets you add 100 tracks at a time
@@ -674,17 +674,6 @@ if button("Get started", key="button1"):
             for batch in batches:
                 sp.playlist_add_items(playlist["id"], batch)
                 time.sleep(sleep_time)
-
-
-            
-            # # spotify only adds 100 songs to be added in one go, so add a loop to ensure all are added if playlist is >100 songs long
-            # length_of_playlist = len(track_id_list)
-            # if length_of_playlist <= 100:
-            #     sp.playlist_add_items(playlist["id"], track_id_list)
-            # else:
-            #     for i in range((length_of_playlist//100)+1):
-            #         sp.playlist_add_items(playlist["id"], track_id_list[(i*100):((i+1)*100)])
-            #         time.sleep(sleep_time)
 
             
             new_playlist_URL = playlist['external_urls']['spotify']
