@@ -432,7 +432,7 @@ if button("Get started", key="button1"):
             series_add = df.loc[df['track_id'] == id].iloc[0]
             full_df = full_df.append(series_add, ignore_index=True)
 
-        joblib.dump(full_df, "./pickles/compressed_song_dataset.pkl")
+        joblib.dump(full_df, "./pickles/compressed_song_dataset.pkl", compress=9)
 
 
         # combine tracks that have been loaded and tracks that have been loaded from dataset
