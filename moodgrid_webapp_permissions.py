@@ -670,20 +670,7 @@ if button("Get started", key="button1"):
                 else:
                     st.session_state["cached_token"] = token
 
-            def app_sign_in():
-                try:
-                    sp = sign_in(st.session_state["cached_token"])
-                except Exception as e:
-                    st.error("An error occurred during sign-in!")
-                    st.write("The error is as follows:")
-                    st.write(e)
-                else:
-                    st.session_state["signed_in"] = True
-                    app_display_welcome()
-                    st.success("Sign in success!")
-                    
-                return sp
-            
+           
             def app_display_welcome():
     
                 # import secrets from streamlit deployment
@@ -726,69 +713,83 @@ if button("Get started", key="button1"):
                                     "clicking the link below."]))
                     st.markdown(link_html, unsafe_allow_html=True)
 
-        if "signed_in" not in st.session_state:
-            st.session_state["signed_in"] = False
-        if "cached_token" not in st.session_state:
-            st.session_state["cached_token"] = ""
-        if "code" not in st.session_state:
-            st.session_state["code"] = ""
-        if "oauth" not in st.session_state:
-            st.session_state["oauth"] = None
+            def app_sign_in():
+                try:
+                    sp = sign_in(st.session_state["cached_token"])
+                except Exception as e:
+                    st.error("An error occurred during sign-in!")
+                    st.write("The error is as follows:")
+                    st.write(e)
+                else:
+                    st.session_state["signed_in"] = True
+                    app_display_welcome()
+                    st.success("Sign in success!")
+                    
+                return sp
+
+            if "signed_in" not in st.session_state:
+                st.session_state["signed_in"] = False
+            if "cached_token" not in st.session_state:
+                st.session_state["cached_token"] = ""
+            if "code" not in st.session_state:
+                st.session_state["code"] = ""
+            if "oauth" not in st.session_state:
+                st.session_state["oauth"] = None
 
 
-        # get current url (stored as dict)
-        url_params = st.experimental_get_query_params()
+            # get current url (stored as dict)
+            url_params = st.experimental_get_query_params()
 
-        # attempt sign in with cached token
-        if st.session_state["cached_token"] != "":
-            sp = app_sign_in()
-        # if no token, but code in url, get code, parse token, and sign in
-        elif "code" in url_params:
-            # all params stored as lists, see doc for explanation
-            st.session_state["code"] = url_params["code"][0]
-            app_get_token()
-            sp = app_sign_in()
-        # otherwise, prompt for redirect
-        else:
-            app_display_welcome()
+            # attempt sign in with cached token
+            if st.session_state["cached_token"] != "":
+                sp = app_sign_in()
+            # if no token, but code in url, get code, parse token, and sign in
+            elif "code" in url_params:
+                # all params stored as lists, see doc for explanation
+                st.session_state["code"] = url_params["code"][0]
+                app_get_token()
+                sp = app_sign_in()
+            # otherwise, prompt for redirect
+            else:
+                app_display_welcome()
 
-        # only display the following after login
-        ### is there another way to do this? clunky to have everything in an if:
-        if st.session_state["signed_in"]:
-            user = sp.current_user()
-            name = user["display_name"]
-            username = user["id"]
+            # only display the following after login
+            ### is there another way to do this? clunky to have everything in an if:
+            if st.session_state["signed_in"]:
+                user = sp.current_user()
+                name = user["display_name"]
+                username = user["id"]
 
 
-            # # authenticate
-            # client_credentials_manager = SpotifyClientCredentials(
-            #     client_id=CLIENT_ID, client_secret=CLIENT_SECRET
-            # )
+                # # authenticate
+                # client_credentials_manager = SpotifyClientCredentials(
+                #     client_id=CLIENT_ID, client_secret=CLIENT_SECRET
+                # )
 
-            # sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
-            #                                             client_secret=CLIENT_SECRET,
-            #                                             redirect_uri="http://localhost:8888/callback",
-            #                                             scope="playlist-modify-private"))
+                # sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
+                #                                             client_secret=CLIENT_SECRET,
+                #                                             redirect_uri="http://localhost:8888/callback",
+                #                                             scope="playlist-modify-private"))
 
-            
-            
-            # user = sp.current_user()["id"]
+                
+                
+                # user = sp.current_user()["id"]
 
-            
-            playlist_description = f"A playlist created using MoodGrid from {plname_list[:]} with a Happy rating of {find_happy} and an Energy rating of {find_energy}"
+                
+                playlist_description = f"A playlist created using MoodGrid from {plname_list[:]} with a Happy rating of {find_happy} and an Energy rating of {find_energy}"
 
-            playlist = sp.user_playlist_create(user=username, name=new_playlist_name, public=False, description=playlist_description)
+                playlist = sp.user_playlist_create(user=username, name=new_playlist_name, public=False, description=playlist_description)
 
-            
-            # split track_id_list into batches of 100, as Spotify only lets you add 100 tracks at a time
-            batches = [track_id_list[i:i+100] for i in range(0, len(track_id_list), 100)]
+                
+                # split track_id_list into batches of 100, as Spotify only lets you add 100 tracks at a time
+                batches = [track_id_list[i:i+100] for i in range(0, len(track_id_list), 100)]
 
-            # add each batch to the playlist
-            for batch in batches:
-                sp.playlist_add_items(playlist["id"], batch)
-                time.sleep(sleep_time)
+                # add each batch to the playlist
+                for batch in batches:
+                    sp.playlist_add_items(playlist["id"], batch)
+                    time.sleep(sleep_time)
 
-            
-            new_playlist_URL = playlist['external_urls']['spotify']
-            st.write(f"Playlist '{new_playlist_name}' has been added to Spotify")
-            st.write(f"Click the link the check it out! {new_playlist_URL}")
+                
+                new_playlist_URL = playlist['external_urls']['spotify']
+                st.write(f"Playlist '{new_playlist_name}' has been added to Spotify")
+                st.write(f"Click the link the check it out! {new_playlist_URL}")
