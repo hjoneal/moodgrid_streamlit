@@ -655,7 +655,7 @@ if button("Get started", key="button1"):
             sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
                                                         client_secret=CLIENT_SECRET,
                                                         redirect_uri="http://localhost:8888/callback",
-                                                        scope="playlist-modify-private"))
+                                                        scope="playlist-modify-public"))
 
             
             
@@ -664,7 +664,7 @@ if button("Get started", key="button1"):
             
             playlist_description = f"A playlist created using MoodGrid from {plname_list[:]} with a Happy rating of {find_happy} and an Energy rating of {find_energy}"
 
-            playlist = sp.user_playlist_create(user, new_playlist_name, public=False, description=playlist_description)
+            playlist = sp.user_playlist_create(user, new_playlist_name, public=True, description=playlist_description)
 
             
             # split track_id_list into batches of 100, as Spotify only lets you add 100 tracks at a time

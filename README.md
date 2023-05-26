@@ -1,4 +1,4 @@
 # moodgrid_streamlit
-MoodGrid Playlist subsetter
+MoodGrid Playlister
 
-https://hjoneal-moodgrid-streamlit-moodgrid-webapp-lk4zqo.streamlit.app/
+https://hjoneal-moodgrid-streamlit-moodgrid-local-26jun-g90zpb.streamlit.app/
