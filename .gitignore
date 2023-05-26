@@ -1,2 +1,4 @@
 .env
 .streamlit/
+.cache
+compressed_song_dataset_local.pkl

@@ -654,7 +654,7 @@ if button("Get started", key="button1"):
 
             sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
                                                         client_secret=CLIENT_SECRET,
-                                                        redirect_uri="http://localhost:8888/callback",
+                                                        redirect_uri="http://localhost:8080/callback",
                                                         scope="playlist-modify-private"))
 
             

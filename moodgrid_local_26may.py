@@ -32,7 +32,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # load full preprocessed dataset so we can skip API calls
-full_df = joblib.load("./pickles/compressed_song_dataset.pkl")
+full_df = joblib.load("./pickles/compressed_song_dataset_local.pkl")
 
 sleep_time=0.075
 st.set_page_config(page_title="MoodGrid Playlist Subsetter", layout="wide")
@@ -432,7 +432,7 @@ if button("Get started", key="button1"):
             series_add = df.loc[df['track_id'] == id].iloc[0]
             full_df = full_df.append(series_add, ignore_index=True)
 
-        joblib.dump(full_df, "./pickles/compressed_song_dataset.pkl", compress=9)
+        joblib.dump(full_df, "./pickles/compressed_song_dataset_local.pkl", compress=9)
 
 
         # combine tracks that have been loaded and tracks that have been loaded from dataset
