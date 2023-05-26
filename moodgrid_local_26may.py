@@ -675,17 +675,6 @@ if button("Get started", key="button1"):
                 sp.playlist_add_items(playlist["id"], batch)
                 time.sleep(sleep_time)
 
-
-            
-            # # spotify only adds 100 songs to be added in one go, so add a loop to ensure all are added if playlist is >100 songs long
-            # length_of_playlist = len(track_id_list)
-            # if length_of_playlist <= 100:
-            #     sp.playlist_add_items(playlist["id"], track_id_list)
-            # else:
-            #     for i in range((length_of_playlist//100)+1):
-            #         sp.playlist_add_items(playlist["id"], track_id_list[(i*100):((i+1)*100)])
-            #         time.sleep(sleep_time)
-
             
             new_playlist_URL = playlist['external_urls']['spotify']
             st.write(f"Playlist '{new_playlist_name}' has been added to Spotify")
